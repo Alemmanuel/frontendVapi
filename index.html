@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cyberpunk PDF Assistant 3000</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <!-- Añadir Font Awesome para iconos cyberpunk -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#8A2BE2',
+                        secondary: '#00C9A7',
+                        accent: '#FFD700',
+                        dark: '#121212',
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 1.5s infinite',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body class="bg-dark text-gray-200 min-h-screen flex flex-col items-center justify-center relative overflow-x-hidden">
+    <!-- Matrix Rain Canvas -->
+    <canvas id="matrixRain"></canvas>
+
+    <!-- Cyber Grid Background -->
+    <div class="cyber-grid"></div>
+
+    <div class="container glitch-container">
+        <h1 class="glitch-text" data-text="AI PDF ANALYZER">AI PDF ANALYZER</h1>
+
+        <div class="cyber-frame">
+            <div class="upload-section">
+                <form id="uploadForm">
+                    <div id="dropArea" class="upload-zone">
+                        <i class="fas fa-file-arrow-up cyber-icon pulse"></i>
+                        <div class="cyber-text">NEURAL SCAN READY</div>
+                        <p class="upload-desc">Drop PDF file here or click to select</p>
+                        <div class="scan-line"></div>
+                        <label for="pdfFile" class="cyber-button-upload">
+                            <i class="fas fa-upload"></i>
+                            SELECT FILE
+                        </label>
+                        <input type="file" id="pdfFile" accept="application/pdf" class="hidden-input">
+                        <div id="fileName" class="file-name"></div>
+                    </div>
+
+                    <button type="submit" id="uploadBtn" class="cyber-button" disabled>
+                        <div class="button-content">
+                            <i class="fas fa-brain"></i>
+                            <span>INITIATE ANALYSIS</span>
+                        </div>
+                        <div class="button-glow"></div>
+                    </button>
+                </form>
+
+                <div class="status-container">
+                    <div id="status" class="status-display">
+                        <div class="status-text"></div>
+                        <div class="progress-bar">
+                            <div class="progress-fill"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tutorial Modal -->
+    <div id="tutorialModal" class="modal-overlay active">
+        <div class="cyber-modal">
+            <h2 class="modal-title">SYSTEM GUIDE</h2>
+            <div class="modal-content">
+                <div class="step-container">
+                    <div class="step">
+                        <div class="step-number">01</div>
+                        <div class="step-info">
+                            <h3>Upload Document</h3>
+                            <p>Select or drag & drop your PDF file into the designated area</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">02</div>
+                        <div class="step-info">
+                            <h3>Neural Processing</h3>
+                            <p>Our AI system will analyze and interpret the document content</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">03</div>
+                        <div class="step-info">
+                            <h3>Voice Interaction</h3>
+                            <p>Engage in voice conversation about the document with our AI</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-actions">
+                    <button id="startTutorial" class="cyber-button-small primary">BEGIN</button>
+                    <button id="skipTutorial" class="cyber-button-small outline">SKIP</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Audio Visualizer -->
+    <div class="visualizer">
+        <!-- Las barras se generarán con JavaScript -->
+    </div>
+
+    <!-- Modal -->
+    <div id="welcomeModal" class="modal-container">
+        <div class="cyber-modal">
+            <h2 class="modal-title">SYSTEM INITIALIZED</h2>
+            <div class="modal-content">
+                <div class="step">
+                    <div class="step-number">01</div>
+                    <div class="step-text">Upload your document to the mainframe</div>
+                </div>
+                <div class="step">
+                    <div class="step-number">02</div>
+                    <div class="step-text">Allow quantum analysis to process data</div>
+                </div>
+                <div class="step">
+                    <div class="step-number">03</div>
+                    <div class="step-text">Interface with AI consciousness</div>
+                </div>
+            </div>
+            <button id="closeModal" class="cyber-button-small">
+                <span>ACKNOWLEDGE</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="matrixRain.js"></script>
+    <script src="app.js"></script>
+</body>
+
+</html>
