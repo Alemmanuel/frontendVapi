@@ -10,13 +10,24 @@ const nums = '0123456789';
 const alphabet = katakana + latin + nums;
 
 const fontSize = 16;
-const columns = canvas.width/fontSize;
+let columns = canvas.width/fontSize;
 
 const rainDrops = [];
 
-for( let x = 0; x < columns; x++ ) {
-    rainDrops[x] = 1;
+function resizeCanvas() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    // Recalcular columnas cuando cambia el tamaño
+    columns = canvas.width/fontSize;
+    // Reiniciar rainDrops con el nuevo número de columnas
+    rainDrops.length = 0;
+    for(let x = 0; x < columns; x++) {
+        rainDrops[x] = 1;
+    }
 }
+
+window.addEventListener('resize', resizeCanvas);
+resizeCanvas(); // Llamar al inicio
 
 function draw() {
     ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
@@ -37,8 +48,3 @@ function draw() {
 }
 
 setInterval(draw, 30);
-
-window.addEventListener('resize', () => {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-});

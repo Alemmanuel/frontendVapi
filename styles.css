@@ -51,6 +51,17 @@
     padding: 0;
     box-sizing: border-box;
     font-family: 'Orbitron', sans-serif;
+    scrollbar-width: thin;
+    scrollbar-color: var(--neon-cyan) rgba(10, 0, 31, 0.3);
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+    position: fixed;
 }
 
 body {
@@ -60,9 +71,8 @@ body {
     min-height: 100vh;
     margin: 0;
     perspective: 1000px;
-    overflow-x: hidden;
-    overflow: hidden;
     position: relative;
+    overflow: hidden !important; /* Forzar overflow hidden */
 }
 
 body::before {
@@ -107,12 +117,15 @@ body::after {
 
 .container {
     width: 90%;
-    max-width: 800px;
-    padding: 3rem;
-    position: fixed; /* Cambio a fixed para control absoluto del posicionamiento */
+    max-width: 450px;
+    height: auto;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    padding: 1.5rem;
     background: rgba(10, 0, 31, 0.95); /* Aumentado opacidad para mejor visibilidad */
     border: 3px solid transparent;
     border-image: conic-gradient(
@@ -478,17 +491,113 @@ p {
 .bar:nth-child(15) { animation-delay: 0.8s; background: var(--accent); }
 
 @media (max-width: 768px) {
+    body {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        -webkit-overflow-scrolling: touch;
+    }
+
     .container {
         width: 95%;
-        padding: 1.5rem;
+        height: auto;
+        max-height: 85vh; /* Reducido para evitar desbordamiento */
+        overflow-y: auto;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        margin: 0;
+        padding: 1rem;
+    }
+
+    .upload-section {
+        padding: 1rem;
+        max-height: calc(100% - 2rem);
+    }
+
+    .upload-zone {
+        padding: 1.5rem 1rem;
+        margin: 0.5rem 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        width: 92%;
+        max-height: 80vh; /* Aún más reducido para móviles pequeños */
+        padding: 0.8rem;
+    }
+    
+    .upload-zone {
+        padding: 1rem;
+        margin: 0.5rem 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        width: 95%;
+        padding: 0.8rem;
+        margin: 1rem auto;
     }
     
     h1 {
+        font-size: 1.5rem;
+    }
+    
+    .upload-zone {
+        padding: 1rem;
+    }
+    
+    .cyber-icon {
         font-size: 2rem;
     }
     
-    .btn {
-        padding: 0.8rem 2rem;
+    .cyber-text {
+        font-size: 0.9rem;
+    }
+    
+    .upload-desc {
+        font-size: 0.8rem;
+    }
+    
+    .cyber-button-upload {
+        padding: 0.6rem 1.5rem;
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-height: 600px) {
+    .container {
+        transform: translate(-50%, -45%);
+        padding-top: 0.5rem;
+        padding-bottom: 0.5rem;
+    }
+    
+    .upload-zone {
+        margin: 0.5rem 0;
+    }
+    
+    h1 {
+        margin-bottom: 0.5rem;
+    }
+}
+
+/* Orientación landscape en móviles */
+@media (max-height: 500px) and (orientation: landscape) {
+    .container {
+        height: 90vh;
+        overflow-y: auto;
+    }
+    
+    .upload-zone {
+        padding: 1rem;
+    }
+    
+    .cyber-button {
+        margin: 1rem auto;
     }
 }
 
@@ -547,6 +656,15 @@ p {
             -2px -2px var(--neon-magenta),
             2px 2px var(--neon-cyan);
     }
+}
+
+#matrixRain {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 0;
 }
 
 #matrixRain {
@@ -756,8 +874,8 @@ p {
 .cyber-button:not(:disabled):hover {
     transform: translateY(-2px);
     box-shadow: 
-        0 0 20px var(--neon-cyan),
-        inset 0 0 10px var(--neon-magenta);
+        0 0 20px var (--neon-cyan),
+        inset 0 0 10px var (--neon-magenta);
 }
 
 .cyber-button:disabled {
@@ -793,8 +911,8 @@ p {
 
 .cyber-button-upload {
     background: transparent;
-    border: 2px solid var(--neon-cyan);
-    color: var(--neon-cyan);
+    border: 2px solid var (--neon-cyan);
+    color: var (--neon-cyan);
     padding: 0.8rem 2rem;
     font-size: 1rem;
     cursor: pointer;
@@ -810,9 +928,9 @@ p {
 }
 
 .cyber-button-upload:hover {
-    background: var(--neon-cyan);
-    color: var(--matrix-black);
-    box-shadow: 0 0 20px var(--neon-cyan);
+    background: var (--neon-cyan);
+    color: var (--matrix-black);
+    box-shadow: 0 0 20px var (--neon-cyan);
 }
 
 .cyber-button-upload i {
@@ -824,7 +942,7 @@ p {
 }
 
 .file-name {
-    color: var(--neon-green);
+    color: var (--neon-green);
     font-size: 0.9rem;
     margin-top: 1rem;
     padding: 0.5rem;
@@ -840,7 +958,7 @@ p {
     left: 0;
     width: 100%;
     height: 100%;
-    background: var(--cyber-gradient);
+    background: var (--cyber-gradient);
     opacity: 0;
     transition: opacity 0.3s ease;
 }
@@ -855,11 +973,32 @@ p {
     left: 0;
     width: 100%;
     height: 2px;
-    background: var(--neon-cyan);
+    background: var (--neon-cyan);
     animation: scanLine 2s linear infinite;
 }
 
 @keyframes scanLine {
     0% { transform: translateY(0); }
     100% { transform: translateY(100%); }
+}
+
+/* Personalización del scrollbar */
+::-webkit-scrollbar {
+    width: 3px; /* Scrollbar más delgado */
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(10, 0, 31, 0.3);
+    border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--neon-cyan);
+    border-radius: 3px;
+    box-shadow: 0 0 5px var(--neon-cyan);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--neon-magenta);
+    box-shadow: 0 0 8px var(--neon-magenta);
 }
